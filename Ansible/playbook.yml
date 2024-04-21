@@ -1,0 +1,43 @@
+---
+- hosts: 192.168.33.9
+  become: yes
+  tasks:
+    - name: Copy LAMP.sh script to slave node
+      copy:
+        src: /home/vagrant/Ansible/LAMP.sh
+        dest: /home/vagrant/LAMP.sh
+        mode: 0755
+
+    - name: Execute LAMP.sh script on slave node
+      shell: /home/vagrant/LAMP.sh
+
+
+
+- name: Create a cron job to check server's uptime every 12 am
+  hosts: 192.168.33.9
+  become: yes
+  tasks:
+    - name: Create the uptime script
+      copy:
+        content: |
+          #!/bin/bash
+          uptime > /var/log/uptime.log
+        dest: /usr/local/bin/check_uptime.sh
+        mode: '0755'
+
+    - name: Create a cron job to check uptime every 12 am
+      cron:
+        name: Check uptime every 12 am
+        job: "/usr/local/bin/check_uptime.sh"
+        minute: '0'
+        hour: '0'
+        state: present
+
+    - name: Display uptime log file
+      shell: cat /var/log/uptime.log
+      register: uptime_output
+
+    - name: Display the server's uptime
+      debug:
+        msg: "{{ uptime_output.stdout }}"
+
