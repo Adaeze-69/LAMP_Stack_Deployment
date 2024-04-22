@@ -19,7 +19,8 @@
   tasks:
     - name: Create the uptime script
       copy:
-        content: |
+        content: 
+        
           #!/bin/bash
           uptime > /var/log/uptime.log
         dest: /usr/local/bin/check_uptime.sh
