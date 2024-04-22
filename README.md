@@ -20,9 +20,10 @@ Create a cron job to check the server’s uptime every 12 am.
 ## Steps
 i. Created and provisioned two vagrant virtual machines (master and slave). Below is the configuration of their vagrantfiles. The configuration had the ip addresses of my machines and had the host and port numbers,and disabling of the ssh insert key.  
 
-![master vagrantfile](image-1.png)
+![master vagrantfile](image-13.png)
 
-![slave vagrantfile](image-2.png)
+![slave vagrantfile](image-15.png)
+
 
 
 ii. Created public keys in both machines and had them saved interchangeably in each other to enable connection between both machines. i.e the public key of master's machine was saved in the authorized key of the slave machine and vice versa. I generated the key using the command 
@@ -288,8 +289,10 @@ vi.  I created a cron job to check the server’s uptime every 12 am  in my play
 
 ![cron job](image-8.png)
 
-> This is the content of my log file where the server's uptime check is stored. Since my master and my slave is connected, I was able to check this from my slave node.
+> This is the content of my log file where the server's uptime check is stored. Since my master and my slave is connected, I was able to check this from my slave node. I used the command  `sudo crontab -l` to checkk
 ![log file](image-14.png)
+
+
 vii. I encountered a couple of errors executing the playbook. Creating the uptime script and display of uptime log file were bringing errors but I was able to fix them by correcting the commands and had my script running again.
 
 
