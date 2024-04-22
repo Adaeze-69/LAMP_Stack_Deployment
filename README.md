@@ -6,10 +6,13 @@ This is an outline on the Provisioning two Ubuntu-based servers, (master and sla
 
 ## Objective
 Automate the provisioning of two Ubuntu-based servers, named “Master” and “Slave”, using Vagrant.
+
 On the Master node, create a bash script to automate the deployment of a LAMP (Linux, Apache, MySQL, PHP) stack.
+
 This script should clone a PHP application from GitHub, install all necessary packages, and configure Apache web server and MySQL. 
 Ensure the bash script is reusable and readable.
 Using an Ansible playbook:
+
 Execute the bash script on the Slave node and verify that the PHP application is accessible through the VM’s IP address (take screenshot of this as evidence)
 Create a cron job to check the server’s uptime every 12 am.
 
@@ -17,7 +20,9 @@ Create a cron job to check the server’s uptime every 12 am.
 ## Steps
 i. Created and provisioned two vagrant virtual machines (master and slave). Below is the configuration of their vagrantfiles. The configuration had the ip addresses of my machines and had the host and port numbers,and disabling of the ssh insert key.  
 
-![master vagrantfile](image-1.png) ![slave vagrantfile](image-2.png)
+![master vagrantfile](image-1.png)
+
+![slave vagrantfile](image-2.png)
 
 
 ii. Created public keys in both machines and had them saved interchangeably in each other to enable connection between both machines. i.e the public key of master's machine was saved in the authorized key of the slave machine and vice versa. I generated the key using the command 
@@ -283,9 +288,11 @@ vi.  I created a cron job to check the server’s uptime every 12 am  in my play
 
 ![cron job](image-8.png)
 
-
-
+> This is the content of my log file where the server's uptime check is stored. Since my master and my slave is connected, I was able to check this from my slave node.
+![log file](image-14.png)
 vii. I encountered a couple of errors executing the playbook. Creating the uptime script and display of uptime log file were bringing errors but I was able to fix them by correcting the commands and had my script running again.
+
+
 
 ![script errors](image-6.png)
 
