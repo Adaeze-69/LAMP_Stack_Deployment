@@ -41,3 +41,14 @@
       debug:
         msg: "{{ uptime_output.stdout }}"
 
+
+    - name: Fetch PHP application content using curl
+      command: "curl -s http://192.168.33.9"  
+      register: php_application  
+      ignore_errors: true  
+    
+
+    - name: Display content of PHP application
+      debug:
+        msg: "PHP Application Content:\n{{ php_application.stdout }}" 
+         
